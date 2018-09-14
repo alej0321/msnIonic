@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal">
+        <img src="assets/img/logo_live_add.png" class="icon-in-button">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgroundPlatzinger">
+  <ion-grid id="homeMeContainer">
+    <ion-row>
+      <ion-col col-3>
+        <div class="avatarFrameonline">
+            <img src="assets/img/generic_avatar.png" class="avatarImg img-fluid">
+        </div>
+      </ion-col>
+      <ion-col col-9 padding>
+        Nick <br />
+        <small>Subnick</small>
+        <br />
+        <small><b>eduardo@platzi.com</b></small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="searchBoxContainer">
+      <ion-input type="text" [(ngModel)]="query" placeholder="Buscar..."></ion-input>
+  </div>
+<div>
+  <div>
+    <b>Amigos</b>
+  </div>
+  <div class="contact-list-item" 
+  [ngClass]="{'contact-offline': user.status == 'Offline' || user.status == 'AppearOffline'}" 
+  [ngStyle]="{'color': user.status == 'Offline' || user.status == 'AppearOffline' ? 'red' : 'blue'}"
+  *ngFor="let user of users | search: query" (click)="goToConversation(user)">
+    <img src="assets/img/{{getIconByStatus(user.status)}}" class="status">
+    <b>{{user.name}}</b>
+    <small *ngIf="user.status">{{user.status}}</small>
+  </div>
+</div>
+</ion-content>
